@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Run Code Guardian validation
         run: |
-          curl -sS -X POST "https://api-dev.codigocode.io/code-guardian/validate/ci" \
+          curl -sS -X POST "https://dev.codigocode.ai/code-guardian/validate/ci" \
             -H "X-Code-Guardian-Api-Key: ${{ secrets.CODE_GUARDIAN_API_KEY }}" \
             -H "Content-Type: application/json" \
             -d '{
