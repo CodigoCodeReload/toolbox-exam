@@ -26,7 +26,8 @@ jobs:
                 "base_branch": "${{ github.event.repository.default_branch }}"
               },
               "pr_number": ${{ github.event.pull_request.number || 'null' }},
+              "bypass_jira": true,
               "run_playbook": true,
-              "run_sonarqube": false,
+              "run_sonarqube": true,
               "run_vulnerability": true
             }'
