@@ -1,6 +1,6 @@
-projectKey=toolbox
-serverUrl=http://localhost:9000
+projectKey=testbbva
+serverUrl=https://sonarqube.codigocode.ai
 serverVersion=26.7.0.124771
-dashboardUrl=http://localhost:9000/dashboard?id=toolbox
-ceTaskId=3d59c8b5-e585-4fba-af7e-b1101bf561f0
-ceTaskUrl=http://localhost:9000/api/ce/task?id=3d59c8b5-e585-4fba-af7e-b1101bf561f0
+dashboardUrl=https://sonarqube.codigocode.ai/dashboard?id=testbbva
+ceTaskId=f178efce-02ad-4116-8720-8c2c807730f3
+ceTaskUrl=https://sonarqube.codigocode.ai/api/ce/task?id=f178efce-02ad-4116-8720-8c2c807730f3
