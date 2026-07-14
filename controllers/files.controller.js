@@ -48,6 +48,7 @@ const filesController = {
         }
       } else {
         // Process all files
+        console.error('No fileName provided, processing all files');
         filesData = await filesService.processFiles()
       }
 
