@@ -3,7 +3,7 @@ name: Runbook de PR
 on:
   pull_request:
     types: [opened, synchronize, reopened]
-     branches:
+    branches:
       - main
   workflow_dispatch:
     inputs:
@@ -13,6 +13,10 @@ on:
         type: string
 
 jobs:
+  # Catch-all: corre las 3 categorias juntas. Code Guardian no tiene una
+  # categoria de "testing funcional" propia (no corre tests, solo
+  # Jira/playbook/SonarQube/Semgrep) -- si esto no es lo que se busca,
+  # ajustar/renombrar.
   validacion_funcional:
     runs-on: ubuntu-latest
     steps:
@@ -39,6 +43,7 @@ jobs:
               "run_vulnerability": true
             }'
 
+  # Solo Semgrep (vulnerabilidades / OWASP)
   validacion_vulnerabilidad:
     runs-on: ubuntu-latest
     steps:
@@ -59,12 +64,12 @@ jobs:
               },
               "pr_number": ${{ github.event.pull_request.number || github.event.inputs.pr_number || 'null' }},
               "bypass_jira": true,
-              "run_playbook": true,
-              "run_sonarqube": true,
-              "sonarqube_project_key": "testbbva",
+              "run_playbook": false,
+              "run_sonarqube": false,
               "run_vulnerability": true
             }'
 
+  # Solo playbook (reglas propias del equipo, evaluadas con IA)
   validacion_estilos:
     runs-on: ubuntu-latest
     steps:
@@ -86,11 +91,11 @@ jobs:
               "pr_number": ${{ github.event.pull_request.number || github.event.inputs.pr_number || 'null' }},
               "bypass_jira": true,
               "run_playbook": true,
-              "run_sonarqube": true,
-              "sonarqube_project_key": "testbbva",
-              "run_vulnerability": true
+              "run_sonarqube": false,
+              "run_vulnerability": false
             }'
 
+  # Solo SonarQube (calidad / deuda tecnica)
   validacion_tecnica:
     runs-on: ubuntu-latest
     steps:
@@ -111,9 +116,8 @@ jobs:
               },
               "pr_number": ${{ github.event.pull_request.number || github.event.inputs.pr_number || 'null' }},
               "bypass_jira": true,
-              "run_playbook": true,
+              "run_playbook": false,
               "run_sonarqube": true,
               "sonarqube_project_key": "testbbva",
-              "run_vulnerability": true
+              "run_vulnerability": false
             }'
-
