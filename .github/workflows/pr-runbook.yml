@@ -1,0 +1,119 @@
+name: Runbook de PR
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+     branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'Numero de PR (opcional, para postear los comentarios ahi)'
+        required: false
+        type: string
+
+jobs:
+  validacion_funcional:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Code Guardian validation
+        run: |
+          curl -sS -X POST "https://dev.codigocode.ai/code-guardian/validate/ci" \
+            -H "X-Code-Guardian-Api-Key: ${{ secrets.CODE_GUARDIAN_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "git": {
+                "provider": "github",
+                "auth_type": "oauth",
+                "use_saved_token": true,
+                "owner": "${{ github.repository_owner }}",
+                "repo": "${{ github.event.repository.name }}",
+                "branch": "${{ github.head_ref || github.ref_name }}",
+                "base_branch": "${{ github.event.repository.default_branch }}"
+              },
+              "pr_number": ${{ github.event.pull_request.number || github.event.inputs.pr_number || 'null' }},
+              "bypass_jira": true,
+              "run_playbook": true,
+              "run_sonarqube": true,
+              "sonarqube_project_key": "testbbva",
+              "run_vulnerability": true
+            }'
+
+  validacion_vulnerabilidad:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Code Guardian validation
+        run: |
+          curl -sS -X POST "https://dev.codigocode.ai/code-guardian/validate/ci" \
+            -H "X-Code-Guardian-Api-Key: ${{ secrets.CODE_GUARDIAN_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "git": {
+                "provider": "github",
+                "auth_type": "oauth",
+                "use_saved_token": true,
+                "owner": "${{ github.repository_owner }}",
+                "repo": "${{ github.event.repository.name }}",
+                "branch": "${{ github.head_ref || github.ref_name }}",
+                "base_branch": "${{ github.event.repository.default_branch }}"
+              },
+              "pr_number": ${{ github.event.pull_request.number || github.event.inputs.pr_number || 'null' }},
+              "bypass_jira": true,
+              "run_playbook": true,
+              "run_sonarqube": true,
+              "sonarqube_project_key": "testbbva",
+              "run_vulnerability": true
+            }'
+
+  validacion_estilos:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Code Guardian validation
+        run: |
+          curl -sS -X POST "https://dev.codigocode.ai/code-guardian/validate/ci" \
+            -H "X-Code-Guardian-Api-Key: ${{ secrets.CODE_GUARDIAN_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "git": {
+                "provider": "github",
+                "auth_type": "oauth",
+                "use_saved_token": true,
+                "owner": "${{ github.repository_owner }}",
+                "repo": "${{ github.event.repository.name }}",
+                "branch": "${{ github.head_ref || github.ref_name }}",
+                "base_branch": "${{ github.event.repository.default_branch }}"
+              },
+              "pr_number": ${{ github.event.pull_request.number || github.event.inputs.pr_number || 'null' }},
+              "bypass_jira": true,
+              "run_playbook": true,
+              "run_sonarqube": true,
+              "sonarqube_project_key": "testbbva",
+              "run_vulnerability": true
+            }'
+
+  validacion_tecnica:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Code Guardian validation
+        run: |
+          curl -sS -X POST "https://dev.codigocode.ai/code-guardian/validate/ci" \
+            -H "X-Code-Guardian-Api-Key: ${{ secrets.CODE_GUARDIAN_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "git": {
+                "provider": "github",
+                "auth_type": "oauth",
+                "use_saved_token": true,
+                "owner": "${{ github.repository_owner }}",
+                "repo": "${{ github.event.repository.name }}",
+                "branch": "${{ github.head_ref || github.ref_name }}",
+                "base_branch": "${{ github.event.repository.default_branch }}"
+              },
+              "pr_number": ${{ github.event.pull_request.number || github.event.inputs.pr_number || 'null' }},
+              "bypass_jira": true,
+              "run_playbook": true,
+              "run_sonarqube": true,
+              "sonarqube_project_key": "testbbva",
+              "run_vulnerability": true
+            }'
+
