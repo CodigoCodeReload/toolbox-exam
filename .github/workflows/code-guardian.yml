@@ -27,5 +27,6 @@ jobs:
               "bypass_jira": true,
               "run_playbook": true,
               "run_sonarqube": true,
+              "sonarqube_project_key": "testbbva",
               "run_vulnerability": true
             }'
